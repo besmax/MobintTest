@@ -3,7 +3,7 @@ package bes.max.mobinttest.companies.data.database
 import androidx.room.Entity
 import bes.max.mobinttest.companies.domain.models.Company
 
-@Entity
+@Entity("companies_table")
 data class CompanyEntity(
     val companyId: String,
     val companyName: String,
