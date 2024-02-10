@@ -26,16 +26,7 @@ class MainActivity : ComponentActivity() {
         val networkClient: NetworkClient by inject()
         lifecycleScope.launch(Dispatchers.IO) {
             networkClient.doRequest(GetAllCompaniesRequest())
-            delay(500)
-            networkClient.doRequest(GetAllCompaniesRequest())
-            delay(500)
-            networkClient.doRequest(GetAllCompaniesRequest())
-            delay(500)
-            networkClient.doRequest(GetAllCompaniesRequest())
-            delay(500)
-            networkClient.doRequest(GetAllCompaniesRequest())
-            delay(500)
-            networkClient.doRequest(GetAllCompaniesRequest())
+
         }
 
         setContent {

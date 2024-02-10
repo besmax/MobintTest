@@ -1,8 +1,10 @@
-package bes.max.mobinttest.companies.domain.models
+package bes.max.mobinttest.companies.data.database
 
-import bes.max.mobinttest.companies.data.database.CompanyEntity
+import androidx.room.Entity
+import bes.max.mobinttest.companies.domain.models.Company
 
-data class Company(
+@Entity
+data class CompanyEntity(
     val companyId: String,
     val companyName: String,
     val loyaltyLevelNumber: String,
@@ -20,7 +22,7 @@ data class Company(
     val accentColor: String
 )
 
-fun Company.map(): CompanyEntity = CompanyEntity(
+fun CompanyEntity.map(): Company = Company(
     companyId = companyId,
     companyName = companyName,
     loyaltyLevelNumber = loyaltyLevelNumber,
