@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MobintTest</string>
+    <string name="manage_cards">Управление картами</string>
+    <string name="loading_companies">Подгрузка компаний</string>
+    <string name="points">баллов</string>
+
 </resources>

@@ -15,8 +15,8 @@ class CompaniesViewModel(
 
     val companiesPagerFlow = pager
         .flow
-        .map { paggingData ->
-            paggingData.map { it.map() }
+        .map { pagingData ->
+            pagingData.map { it.map() }
         }
         .cachedIn(viewModelScope)
 }

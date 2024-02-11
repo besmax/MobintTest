@@ -20,7 +20,7 @@ class CompaniesRepositoryImpl(
     private val companyDao: CompanyDao
 ) : RemoteMediator<Int, CompanyEntity>() {
 
-    var nextPage = 1
+    private var nextPage = 1
 
     override suspend fun load(
         loadType: LoadType,
@@ -28,7 +28,11 @@ class CompaniesRepositoryImpl(
     ): MediatorResult {
         return try {
             val loadKey = when (loadType) {
-                LoadType.REFRESH -> 1
+                LoadType.REFRESH -> {
+                    nextPage = 1
+                    nextPage
+                }
+
                 LoadType.PREPEND -> return MediatorResult.Success(
                     endOfPaginationReached = true
                 )
@@ -36,8 +40,10 @@ class CompaniesRepositoryImpl(
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()
                     if (lastItem == null) {
-                        1
+                        nextPage = 1
+                        nextPage
                     } else {
+                        nextPage += 1
                         nextPage
                     }
                 }
