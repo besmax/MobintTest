@@ -1,10 +1,12 @@
 package bes.max.mobinttest.companies.data.database
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import bes.max.mobinttest.companies.domain.models.Company
 
 @Entity("companies_table")
 data class CompanyEntity(
+    @PrimaryKey
     val companyId: String,
     val companyName: String,
     val loyaltyLevelNumber: Int,

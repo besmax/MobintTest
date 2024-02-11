@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import bes.max.mobinttest.companies.data.dto.GetAllCompaniesRequest
+import bes.max.mobinttest.companies.ui.CompanyCardsScreen
 import bes.max.mobinttest.core.data.network.NetworkClient
 import bes.max.mobinttest.core.ui.theme.MobintTestTheme
 import kotlinx.coroutines.Dispatchers
@@ -23,12 +24,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val networkClient: NetworkClient by inject()
-        lifecycleScope.launch(Dispatchers.IO) {
-            networkClient.doRequest(GetAllCompaniesRequest())
-
-        }
-
         setContent {
             MobintTestTheme {
                 // A surface container using the 'background' color from the theme
@@ -36,25 +31,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    CompanyCardsScreen()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MobintTestTheme {
-        Greeting("Android")
     }
 }

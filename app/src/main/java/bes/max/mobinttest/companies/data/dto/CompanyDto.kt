@@ -1,6 +1,7 @@
 package bes.max.mobinttest.companies.data.dto
 
 import bes.max.mobinttest.companies.data.database.CompanyEntity
+import bes.max.mobinttest.companies.domain.models.Company
 
 data class CompanyDto(
     val company: CompanyId,
@@ -36,7 +37,25 @@ data class MobileAppDashboardDto(
     val accentColor: String
 )
 
-fun CompanyDto.map(): CompanyEntity = CompanyEntity(
+fun CompanyDto.mapToEntity(): CompanyEntity = CompanyEntity(
+    companyId = company.companyId,
+    companyName = mobileAppDashboard.companyName,
+    loyaltyLevelNumber = customerMarkParameters.loyaltyLevel.number,
+    loyaltyLevelName = customerMarkParameters.loyaltyLevel.name,
+    loyaltyLevelRequiredSum = customerMarkParameters.loyaltyLevel.requiredSum,
+    loyaltyLevelMarkToCash = customerMarkParameters.loyaltyLevel.markToCash,
+    loyaltyLevelCashToMark = customerMarkParameters.loyaltyLevel.cashToMark,
+    loyaltyLevelMark = customerMarkParameters.mark,
+    logo = mobileAppDashboard.logo,
+    backgroundColor = mobileAppDashboard.backgroundColor,
+    mainColor = mobileAppDashboard.mainColor,
+    cardBackgroundColor = mobileAppDashboard.cardBackgroundColor,
+    textColor = mobileAppDashboard.textColor,
+    highlightTextColor = mobileAppDashboard.highlightTextColor,
+    accentColor = mobileAppDashboard.accentColor
+)
+
+fun CompanyDto.map(): Company = Company(
     companyId = company.companyId,
     companyName = mobileAppDashboard.companyName,
     loyaltyLevelNumber = customerMarkParameters.loyaltyLevel.number,

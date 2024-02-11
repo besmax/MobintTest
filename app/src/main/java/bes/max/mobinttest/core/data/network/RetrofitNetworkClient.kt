@@ -17,7 +17,9 @@ class RetrofitNetworkClient(
 
         return when (request) {
             is GetAllCompaniesRequest -> getCompanies(request)
-            else -> Response().apply { resultCode = CODE_WRONG_REQUEST }
+            else -> Response().apply {
+                resultCode = CODE_WRONG_REQUEST
+            }
 
         }
     }
@@ -30,11 +32,16 @@ class RetrofitNetworkClient(
                 response.body()!!.apply { resultCode = CODE_SUCCESS }
             } else {
                 Log.d("RetrofitNetworkClient", response.code().toString())
-                Response().apply { resultCode = response.code() }
+                Response().apply {
+                    resultCode = response.code()
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Response().apply { resultCode = CODE_SERVER_ERROR }
+            Response().apply {
+                resultCode = CODE_SERVER_ERROR
+                exception = e
+            }
         }
     }
 
