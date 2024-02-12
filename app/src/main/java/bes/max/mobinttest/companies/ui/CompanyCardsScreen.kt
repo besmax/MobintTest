@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -59,9 +58,11 @@ import bes.max.mobinttest.core.ui.theme.LightGray
 import bes.max.mobinttest.core.ui.theme.SegoeFontFamily
 import bes.max.mobinttest.core.ui.theme.White
 import coil.compose.AsyncImage
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+import retrofit2.HttpException
 
 @Composable
 fun CompanyCardsScreen(
@@ -83,24 +84,41 @@ fun CompanyCardsScreen(
                 .background(color = LightGray)
         ) {
             Title()
-            CompanyList(
-                companies = companies,
-                onEyeIconClick = { text ->
-                    localCoroutineScope.launch {
-                        snackbarHostState.showSnackbar(text)
-                    }
-                },
-                onDeleteIconClick = { text ->
-                    localCoroutineScope.launch {
-                        snackbarHostState.showSnackbar(text)
-                    }
-                },
-                onMoreButtonClick = { text ->
-                    localCoroutineScope.launch {
-                        snackbarHostState.showSnackbar(text)
-                    }
-                },
-            )
+
+            if (companies.loadState.refresh is LoadState.Error) {
+                val error = (companies.loadState.refresh as LoadState.Error).error
+                OnError(throwable = error, snackbarHostState, localCoroutineScope)
+            }
+            if (companies.itemCount != 0) {
+                CompanyList(
+                    companies = companies,
+                    onEyeIconClick = { text ->
+                        localCoroutineScope.launch {
+                            snackbarHostState.showSnackbar(text)
+                        }
+                    },
+                    onDeleteIconClick = { text ->
+                        localCoroutineScope.launch {
+                            snackbarHostState.showSnackbar(text)
+                        }
+                    },
+                    onMoreButtonClick = { text ->
+                        localCoroutineScope.launch {
+                            snackbarHostState.showSnackbar(text)
+                        }
+                    },
+                )
+            } else {
+                Text(
+                    text = stringResource(id = R.string.no_companies),
+                    fontFamily = SegoeFontFamily,
+                    fontSize = dimensionResource(id = R.dimen.text_title_size).value.sp,
+                    textAlign = TextAlign.Center,
+                    color = Blue
+                )
+            }
+
+
         }
     }
 
@@ -368,8 +386,7 @@ fun CompanyList(
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = CenterHorizontally
             ) {
                 items(companies) { company ->
                     if (company != null) {
@@ -384,7 +401,7 @@ fun CompanyList(
 
                 item {
                     if (companies.loadState.append is LoadState.Loading) {
-                        CircularProgressIndicator()
+                        LoadingCompanies()
                     }
                 }
             }
@@ -429,22 +446,35 @@ fun LoadingCompanies() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun showDialog(
-    onDismissRequest: () -> Unit,
-    text: String
+fun OnError(
+    throwable: Throwable,
+    snackbarHostState: SnackbarHostState,
+    localCoroutineScope: CoroutineScope
 ) {
-    BasicAlertDialog(onDismissRequest = { onDismissRequest() }
-    ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
-            Text(
-                text = text,
-                fontFamily = SegoeFontFamily,
-                fontSize = dimensionResource(id = R.dimen.text_title_size).value.sp,
-                textAlign = TextAlign.Center,
-                color = Black
-            )
+    val context = LocalContext.current
+
+    when (throwable) {
+        is HttpException -> {
+            if (throwable.code() == 401) {
+                localCoroutineScope.launch {
+                    snackbarHostState.showSnackbar(context.resources.getString(R.string.autorization_error))
+                }
+            } else if (throwable.code() == 400) {
+                localCoroutineScope.launch {
+                    snackbarHostState.showSnackbar(throwable.message())
+                }
+            } else {
+                localCoroutineScope.launch {
+                    snackbarHostState.showSnackbar(context.resources.getString(R.string.server_error))
+                }
+            }
+        }
+
+        else -> {
+            localCoroutineScope.launch {
+                snackbarHostState.showSnackbar(context.resources.getString(R.string.server_error))
+            }
         }
     }
 }

@@ -10,5 +10,8 @@
     <string name="more_button_dialog">нажата кнопка Подробнее, ид компании: %1$s</string>
     <string name="show_icon_dialog">нажата иконка Показать, ид компании: %1$s</string>
     <string name="delete_icon_dialog">нажата иконка Удалить, ид компании: %1$s</string>
+    <string name="no_companies">Нет компаний</string>
+    <string name="autorization_error">Ошибка авторизации</string>
+    <string name="server_error">Всё упало</string>
 
 </resources>

@@ -28,12 +28,11 @@ class RetrofitNetworkClient(
         return try {
             val response = companiesApiService.getAllCompanies(request)
             if (response.code() == CODE_SUCCESS && response.body() != null) {
-                Log.d("RetrofitNetworkClient", response.body().toString())
                 response.body()!!.apply { resultCode = CODE_SUCCESS }
             } else {
-                Log.d("RetrofitNetworkClient", response.code().toString())
                 Response().apply {
                     resultCode = response.code()
+                    this.response = response
                 }
             }
         } catch (e: Exception) {

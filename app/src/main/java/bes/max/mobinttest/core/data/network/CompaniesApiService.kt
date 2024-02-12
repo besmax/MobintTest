@@ -10,7 +10,7 @@ import retrofit2.http.QueryMap
 
 interface CompaniesApiService {
 
-    @POST("getAllCompaniesLong")
+    @POST("getAllCompanies")
     suspend fun getAllCompanies(@Body request: GetAllCompaniesRequest): Response<GetAllCompaniesResponse>
 
 

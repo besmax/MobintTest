@@ -12,6 +12,7 @@ import bes.max.mobinttest.companies.data.dto.mapToEntity
 import bes.max.mobinttest.core.data.network.NetworkClient
 import bes.max.mobinttest.core.data.network.RetrofitNetworkClient.Companion.CODE_SUCCESS
 import retrofit2.HttpException
+import retrofit2.Response
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
@@ -67,7 +68,7 @@ class CompaniesRepositoryImpl(
                     endOfPaginationReached = response.companies.isEmpty()
                 )
             } else {
-                MediatorResult.Error(response.exception ?: Throwable())
+                MediatorResult.Error(HttpException(response.response as Response<*>))
             }
         } catch (e: IOException) {
             MediatorResult.Error(e)
