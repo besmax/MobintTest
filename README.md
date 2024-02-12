@@ -1,10 +1,10 @@
 # Тестовое задание
 
-https://github.com/besmax/MobintTest/assets/88286767/d9a43f4f-74d9-4a55-a9b6-a7b8b390daf0
+https://github.com/besmax/MobintTest/assets/88286767/7f53fa98-752f-4555-b2a0-b06221c1f0ba
 
-https://github.com/besmax/MobintTest/assets/88286767/7ce1892a-a013-48c2-9ae0-90a326b5726e
+https://github.com/besmax/MobintTest/assets/88286767/2972422c-bc9f-490f-be8d-f56ab9c58da7
 
-https://github.com/besmax/MobintTest/assets/88286767/dbc30c26-bc83-4cef-ab19-328f2129529c
+https://github.com/besmax/MobintTest/assets/88286767/715ae04a-8d7a-4e31-ab6c-11df80f79fee
 
 ## Текст задания
 Отображение
