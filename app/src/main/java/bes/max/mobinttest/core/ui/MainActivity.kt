@@ -3,22 +3,13 @@ package bes.max.mobinttest.core.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.lifecycleScope
-import bes.max.mobinttest.companies.data.dto.GetAllCompaniesRequest
-import bes.max.mobinttest.companies.ui.CompanyCardsScreen
-import bes.max.mobinttest.core.data.network.NetworkClient
+import androidx.navigation.compose.rememberNavController
+import bes.max.mobinttest.core.ui.navigation.NavigationGraph
 import bes.max.mobinttest.core.ui.theme.MobintTestTheme
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,12 +17,15 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MobintTestTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    CompanyCardsScreen()
+                val navController = rememberNavController()
+
+                Scaffold { paddingValues ->
+                    Box(
+                        modifier = Modifier.padding(paddingValues)
+                    ) {
+
+                        NavigationGraph(navController)
+                    }
                 }
             }
         }

@@ -134,8 +134,8 @@ fun CompanyItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = dimensionResource(id = R.dimen.margin1) / 2),
-        shape = RoundedCornerShape(16.dp),
+            .padding(top = dimensionResource(id = R.dimen.margin1)),
+        shape = RoundedCornerShape(20.dp),
         colors = androidx.compose.material3.CardDefaults.cardColors(
             containerColor = Color(android.graphics.Color.parseColor(company.cardBackgroundColor))
         )
@@ -228,8 +228,9 @@ fun CompanyItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = dimensionResource(id = R.dimen.margin1),
-                    vertical = dimensionResource(id = R.dimen.margin2)
+                    start = dimensionResource(id = R.dimen.margin1),
+                    end = dimensionResource(id = R.dimen.margin1),
+                    bottom = dimensionResource(id = R.dimen.margin2)
                 ),
         ) {
             Text(
@@ -266,7 +267,6 @@ fun CompanyItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    bottom = dimensionResource(id = R.dimen.margin1),
                     start = dimensionResource(id = R.dimen.margin2),
                     end = dimensionResource(id = R.dimen.margin2)
                 ),
@@ -319,7 +319,12 @@ fun CompanyItem(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(android.graphics.Color.parseColor(company.backgroundColor))
                 ),
-                modifier = Modifier.padding(end = dimensionResource(id = R.dimen.margin1))
+                modifier = Modifier
+                    .padding(
+                        end = dimensionResource(id = R.dimen.margin1),
+                        top = 4.dp,
+                        bottom = 4.dp
+                    )
             ) {
                 Text(
                     text = stringResource(id = R.string.more_details),
