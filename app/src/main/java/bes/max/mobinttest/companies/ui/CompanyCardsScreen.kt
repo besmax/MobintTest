@@ -34,6 +34,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -402,18 +403,21 @@ fun CompanyList(
 
 @Composable
 fun LoadingCompanies() {
-    Box(
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        contentAlignment = Alignment.Center
+        horizontalAlignment = CenterHorizontally
     ) {
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin1)))
+
         CircularProgressIndicator(
             modifier = Modifier
                 .size(dimensionResource(id = R.dimen.size_preloader))
-                .align(Alignment.Center),
+                .align(CenterHorizontally),
             color = Black
         )
 
-        Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.margin2)))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin2)))
 
         Text(
             text = stringResource(id = R.string.loading_companies),

@@ -70,18 +70,6 @@ val dataModule = module {
         )
     }
 
-//    return Pager(
-//        config = PagingConfig(pageSize = 20),
-//        remoteMediator = BeerRemoteMediator(
-//            beerDb = beerDb,
-//            beerApi = beerApi
-//        ),
-//        pagingSourceFactory = {
-//            beerDb.dao.pagingSource()
-//        }
-//    )
-
 }
 
 private const val COMPANIES_BASE_URL = "http://devapp.bonusmoney.pro/mobileapp/"
-private const val MOBINT_TEST_KEY = "MobintTestKey"
