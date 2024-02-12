@@ -1,9 +1,7 @@
 package bes.max.mobinttest.core.data.network
 
 import android.content.Context
-import android.util.Log
 import bes.max.mobinttest.companies.data.dto.GetAllCompaniesRequest
-import bes.max.mobinttest.companies.data.dto.toQueryMap
 import bes.max.mobinttest.core.data.dto.Response
 
 class RetrofitNetworkClient(
@@ -48,7 +46,6 @@ class RetrofitNetworkClient(
         const val CODE_NO_INTERNET = -1
         const val CODE_SUCCESS = 200
         const val CODE_WRONG_REQUEST = 400
-        const val CODE_AUTORIZATION_ERROR = 401
         const val CODE_SERVER_ERROR = 500
     }
 }

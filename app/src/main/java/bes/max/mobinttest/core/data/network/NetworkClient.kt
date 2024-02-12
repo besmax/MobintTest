@@ -5,6 +5,6 @@ import bes.max.mobinttest.core.data.dto.Response
 
 interface NetworkClient {
 
-    suspend fun doRequest(request: Any) : Response
+    suspend fun doRequest(request: Any): Response
 
 }
