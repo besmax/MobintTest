@@ -3,5 +3,12 @@
     <string name="manage_cards">Управление картами</string>
     <string name="loading_companies">Подгрузка компаний</string>
     <string name="points">баллов</string>
+    <string name="cashback">Кешбэк</string>
+    <string name="level">Уровень</string>
+    <string name="cashback_placeholder">%1$s %%</string>
+    <string name="more_details">Подробнее</string>
+    <string name="more_button_dialog">нажата кнопка Подробнее, ид компании: %1$s</string>
+    <string name="show_icon_dialog">нажата иконка Показать, ид компании: %1$s</string>
+    <string name="delete_icon_dialog">нажата иконка Удалить, ид компании: %1$s</string>
 
 </resources>
